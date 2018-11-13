@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>clean-architecture-example</artifactId>
-        <groupId>com.github.aantoniadis</groupId>
+        <artifactId>qukt-server</artifactId>
+        <groupId>com.mtallon.qukt</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
@@ -14,24 +14,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.aantoniadis</groupId>
+            <groupId>com.mtallon.qukt</groupId>
             <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.aantoniadis</groupId>
+            <groupId>com.mtallon.qukt</groupId>
             <artifactId>usecases</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.aantoniadis</groupId>
+            <groupId>com.mtallon.qukt</groupId>
             <artifactId>dataproviders</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.version}</version>
+            <version>2.0.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.version}</version>
+            <version>2.0.6.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -100,9 +100,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.version}</version>
+                <version>2.0.6.RELEASE</version>
                 <configuration>
-                    <mainClass>com.github.aantoniadis.delivery.AppKt</mainClass>
+                    <mainClass>com.mtallon.qukt.delivery.AppKt</mainClass>
                 </configuration>
                 <executions>
                     <execution>

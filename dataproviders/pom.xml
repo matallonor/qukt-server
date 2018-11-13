@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>clean-architecture-example</artifactId>
-        <groupId>com.github.aantoniadis</groupId>
+        <artifactId>qukt-server</artifactId>
+        <groupId>com.mtallon.qukt</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
@@ -14,30 +14,44 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.aantoniadis</groupId>
+            <groupId>com.mtallon.qukt</groupId>
             <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.aantoniadis</groupId>
+            <groupId>com.mtallon.qukt</groupId>
+            <artifactId>dataproviders</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtallon.qukt</groupId>
             <artifactId>usecases</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring.version}</version>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.0.6.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>2.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+            <version>2.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.0.6.RELEASE</version>
         </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
