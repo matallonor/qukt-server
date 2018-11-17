@@ -1,6 +1,17 @@
 The architecture of all this application has been implemented following the example at:
 (https://github.com/aantoniadis/clean-architecture-example)
 
+# Init Elasticsearch
+
+- First you need to download docker and docker-compose
+- Then execute command:
+
+    docker-compose up
+
+    or if you want it to run in a daemon:
+
+    docker-compose up -d
+
 # Compile and run the app
 
 `./mvnw package && ./mvnw spring-boot:run -pl delivery`
