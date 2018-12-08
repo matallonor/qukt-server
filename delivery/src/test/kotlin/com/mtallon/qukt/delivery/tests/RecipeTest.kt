@@ -39,11 +39,12 @@ class RecipeTest {
     }
 
     private inline fun <reified T> createRecipe(
+        id: String,
         title: String,
         ingredients: List<String>,
-        description: String
+        description: List<String>
     ): ResponseEntity<T> {
-        val entity = HttpEntity(RecipeDto(title = title, ingredients = ingredients, description = description))
+        val entity = HttpEntity(RecipeDto(id = id, title = title, ingredients = ingredients, description = description))
         return restTemplate.exchange("/recipes/", HttpMethod.POST, entity, T::class.java)
     }
 

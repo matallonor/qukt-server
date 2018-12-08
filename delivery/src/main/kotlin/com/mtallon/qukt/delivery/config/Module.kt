@@ -16,10 +16,28 @@ import java.net.InetAddress
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.transport.client.PreBuiltTransportClient
 import org.elasticsearch.common.settings.Settings
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
+
+
+@EnableWebMvc
 @Configuration
 class Module {
+
+    @Bean
+    fun webMvcConfigurer(): WebMvcConfigurer {
+        return object : WebMvcConfigurerAdapter() {
+            override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+                registry.addResourceHandler("/public/**")
+                        .addResourceLocations("classpath:/public/")
+            }
+        }
+    }
+
     @Bean
     fun recipesResourceImp(
             useCaseExecutor: UseCaseExecutor,

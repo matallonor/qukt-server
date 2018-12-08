@@ -8,6 +8,6 @@ import java.util.concurrent.CompletionStage
 interface RecipesResource {
 
     @CrossOrigin()
-    @GetMapping("/")
-    fun getAllRecipes(): CompletionStage<List<RecipeDto>>
+    @GetMapping("/{query}")
+    fun getAllRecipes(@PathVariable("query") query: String): CompletionStage<List<RecipeDto>>
 }

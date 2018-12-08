@@ -5,13 +5,13 @@ import com.mtallon.qukt.usecases.UseCase
 import com.mtallon.qukt.usecases.exceptions.NotFoundException
 
 class GetRecipesUseCase(private val recipeRepository: RecipeRepository) :
-        UseCase<Unit, List<Recipe>> {
+        UseCase<String, List<Recipe>> {
 
-    override fun execute(request: Unit): List<Recipe> {
-        return recipeRepository.getAllRecipes() ?: throw NotFoundException("No recipes found")
+    override fun execute(query: String): List<Recipe> {
+        return recipeRepository.getAllRecipes(query) ?: throw NotFoundException("No recipes found")
     }
 
     interface RecipeRepository {
-        fun getAllRecipes(): List<Recipe>?
+        fun getAllRecipes(query: String): List<Recipe>?
     }
 }
