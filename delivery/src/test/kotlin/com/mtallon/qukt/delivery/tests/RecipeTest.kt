@@ -1,7 +1,9 @@
 package com.mtallon.qukt.delivery.tests
 
+import com.mtallon.qukt.core.entities.Recipe
 import com.mtallon.qukt.delivery.App
 import com.mtallon.qukt.delivery.rest.api.RecipeDto
+import com.mtallon.qukt.usecases.exceptions.NotFoundException
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,6 +18,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.junit4.SpringRunner
+import java.lang.Exception
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [(App::class)], webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -23,29 +26,32 @@ class RecipeTest {
     @Autowired
     lateinit var restTemplate: TestRestTemplate
 
-    // TESTS
     @Test
-    fun shouldReturn200AndTheRecipes_whenRetrievingAllRecipes() {
-        val response = getAllRecipes<RecipeDto>()
+    fun shouldReturn200_whenRetrievingRecipes() {
+        val response = getRecipes<RecipeDto>("chocolate")
+        assertEquals(HttpStatus.OK, response.statusCode)
+        assertNotNull(response)
+    }
+
+    @Test
+    fun shouldReturn200AndFilteredRecipes_whenRetrievingRecipesByQuery() {
+        val response = getRecipes<RecipeDto>("chocolate")
         val responseDto = response.body!!
         assertEquals(HttpStatus.OK, response.statusCode)
-        assertNotNull(responseDto.get(0))
+        assertNotNull(response)
+        assertTrue(responseDto.isNotEmpty())
+        assertNotNull(responseDto[0])
     }
 
-
-    // METHODS
-    private inline fun <reified T> getAllRecipes(): ResponseEntity<List<T>> {
-        return restTemplate.getForEntity(   "/recipes/", object: ParameterizedTypeReference<List<T>>(){})
+    @Test(expected = Exception::class)
+    fun shouldThrowException_whenNotSpecifyingAQuery() {
+        val response = getRecipes<RecipeDto>("")
     }
 
-    private inline fun <reified T> createRecipe(
-        id: String,
-        title: String,
-        ingredients: List<String>,
-        description: List<String>
-    ): ResponseEntity<T> {
-        val entity = HttpEntity(RecipeDto(id = id, title = title, ingredients = ingredients, description = description))
-        return restTemplate.exchange("/recipes/", HttpMethod.POST, entity, T::class.java)
+    // That method performs a call to the /recipes endpoint with the given query
+    private inline fun <reified T> getRecipes(query: String): ResponseEntity<Array<Recipe>> {
+        val url = "/recipes/$query"
+        return restTemplate.getForEntity(url, Array<Recipe>::class.java)
     }
 
 }

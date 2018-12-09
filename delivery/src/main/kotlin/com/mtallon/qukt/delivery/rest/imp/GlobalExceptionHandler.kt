@@ -17,8 +17,4 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(NotFoundException::class)
     fun notFound(ex: NotFoundException) =
         ResponseEntity(ErrorDto(ErrorCodeDto.NOT_FOUND, "Resource not found"), HttpStatus.NOT_FOUND)
-
-    @ExceptionHandler(ValidationException::class)
-    fun alreadyExists(ex: ValidationException) =
-        ResponseEntity(ErrorDto(ErrorCodeDto.VALIDATION_ERROR, ex.message), HttpStatus.BAD_REQUEST)
 }
